@@ -1,6 +1,3 @@
-"ndew/supertab' BasedOn:
-"  https://github.com/amix/vimrc
-"
 " Sections:
 "    -> General
 "    -> VIM user interface
@@ -25,75 +22,99 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-projectionist'
-Plugin 'blarghmatey/split-expander'
-Plugin 'rking/ag.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-bundler'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tmhedberg/matchit'
-Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'vim-scripts/tComment'
-Plugin 'scrooloose/nerdtree'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'skwp/greplace.vim'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-haml'
-Plugin 'digitaltoad/vim-pug'
-Plugin 'dkprice/vim-easygrep'
-Plugin 'tpope/vim-rails'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'jsx/jsx.vim'
-Plugin 'myusuf3/numbers.vim'
-Plugin 'terryma/vim-expand-region'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-notes'
-Plugin 'rbgrouleff/bclose.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'mattn/emmet-vim'
-Plugin 'szw/vim-tags'
-Plugin 'vim-scripts/BufOnly.vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'Yggdroot/indentLine'
-Plugin 'ervandew/supertab'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'guns/vim-clojure-static'
-Plugin 'tpope/vim-fireplace'
-Plugin 'vim-scripts/paredit.vim'
-Plugin 'luochen1990/rainbow'
-Plugin 'csscomb/vim-csscomb'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'sickill/vim-pasta'
 
-" Track the engine.
-Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+" General---------------{{{
+  Plugin 'gmarik/Vundle.vim'
+  Plugin 'tpope/vim-sensible'
+"}}}
 
-"Line highlight
-Plugin 'miyakogi/conoline.vim'
-"Color themes
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'sickill/vim-monokai'
-Plugin 'tomasr/molokai'
-Plugin 'jacoborus/tender'
-Plugin 'gertjanreynaert/cobalt2-vim-theme'
-Plugin 'dracula/vim'
+" Syntax----------------{{{
+  Plugin 'vim-ruby/vim-ruby'
+  Plugin 'elixir-lang/vim-elixir'
+  Plugin 'scrooloose/syntastic'
+  Plugin 'tpope/vim-haml'
+  Plugin 'digitaltoad/vim-pug'
+  Plugin 'kchmck/vim-coffee-script'
+  Plugin 'pangloss/vim-javascript'
+  Plugin 'jelera/vim-javascript-syntax'
+  Plugin 'jsx/jsx.vim'
+  Plugin 'hail2u/vim-css3-syntax'
+"}}}
+
+" Search----------------{{{
+  Plugin 'rking/ag.vim'
+  Plugin 'skwp/greplace.vim'
+  Plugin 'dkprice/vim-easygrep'
+"}}}
+
+" Git helpers-----------{{{
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'airblade/vim-gitgutter'
+"}}}
+
+" Rails specific--------{{{
+  Plugin 'tpope/vim-rails'
+  Plugin 'tpope/vim-bundler'
+  Plugin 'nelstrom/vim-textobj-rubyblock'
+"}}}
+
+" Themes----------------{{{
+  Plugin 'altercation/vim-colors-solarized'
+  Plugin 'chriskempson/vim-tomorrow-theme'
+  Plugin 'sickill/vim-monokai'
+  Plugin 'tomasr/molokai'
+  Plugin 'jacoborus/tender'
+  Plugin 'gertjanreynaert/cobalt2-vim-theme'
+  Plugin 'dracula/vim'
+"}}}
+
+" Completion------------{{{
+  Plugin '1995eaton/vim-better-javascript-completion'
+  Plugin 'othree/csscomplete.vim'
+  Plugin 'Shougo/neocomplete.vim'
+"}}}
+
+" Snippets--------------{{{
+  Plugin 'SirVer/ultisnips'
+  Plugin 'honza/vim-snippets'
+"}}}
+
+" Utils-----------------{{{
+  Plugin 'bling/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
+  Plugin 'ctrlpvim/ctrlp.vim'
+  Plugin 'blarghmatey/split-expander'
+  Plugin 'tpope/vim-projectionist'
+  Plugin 'tpope/vim-endwise'
+  Plugin 'tpope/vim-surround'
+  Plugin 'tpope/vim-unimpaired'
+  Plugin 'tmhedberg/matchit'
+  Plugin 'kana/vim-textobj-user'
+  Plugin 'vim-scripts/tComment'
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'MarcWeber/vim-addon-mw-utils'
+  Plugin 'myusuf3/numbers.vim'
+  Plugin 'ryanoasis/vim-devicons'
+  Plugin 'xolox/vim-misc'
+  Plugin 'xolox/vim-notes'
+  Plugin 'rbgrouleff/bclose.vim'
+  Plugin 'jiangmiao/auto-pairs'
+  Plugin 'mattn/emmet-vim'
+  Plugin 'szw/vim-tags'
+  Plugin 'vim-scripts/BufOnly.vim'
+  Plugin 'easymotion/vim-easymotion'
+  Plugin 'Yggdroot/indentLine'
+  Plugin 'guns/vim-clojure-static'
+  Plugin 'tpope/vim-fireplace'
+  Plugin 'vim-scripts/paredit.vim'
+  Plugin 'luochen1990/rainbow'
+  Plugin 'csscomb/vim-csscomb'
+  Plugin 'christoomey/vim-tmux-navigator'
+  Plugin 'sickill/vim-pasta'
+  Plugin 'gko/vim-coloresque'
+  Plugin 'miyakogi/conoline.vim'
+  Plugin 'terryma/vim-multiple-cursors'
+"}}}
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -121,8 +142,7 @@ let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
-nmap <leader>q :wq!<cr>
-
+nmap <leader>q :q!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -217,6 +237,9 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
+" !!!! Important to properly show colors in terminal
+let g:solarized_termcolors=256
+
 " These are the basic settings to get the font to work (required):
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
 set encoding=utf-8
@@ -230,7 +253,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -238,7 +260,6 @@ set ffs=unix,dos,mac
 set nobackup
 set nowb
 set noswapfile
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -261,7 +282,6 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
-
 """"""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
@@ -269,7 +289,6 @@ set wrap "Wrap lines
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -333,13 +352,6 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" Specify the behavior when switching between buffers
-"try
-"  set switchbuf=useopen,usetab,newtab
-"  set stal=2
-"catch
-"endtry
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
@@ -432,17 +444,6 @@ command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 nnoremap \ :Ag<SPACE>  **/*.<left><left><left><left><left><left><left>
 
-" Do :help cope if you are unsure what cope is. It's super useful!
-"
-" When you search with vimgrep, display your results in cope by doing:
-"   <leader>cc
-"
-" To go to the next search result do:
-"   <leader>n
-"
-" To go to the previous search results do:
-"   <leader>p
-"
 map <leader>co :botright cope<cr>
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
@@ -452,6 +453,7 @@ map <leader>cl :cclose<cr>
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nospell
+
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -462,29 +464,8 @@ map <leader>sa zg
 map <leader>s? z=
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins specific settings
+" => Additional Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:rainbow_active = 1
-let g:conoline_auto_enable = 1
-let g:conoline_use_colorscheme_default_normal=1
-let g:conoline_use_colorscheme_default_insert=1
-let g:indentLine_char = '|'
-let g:indentLine_color_term = 239
-let g:solarized_termcolors=256
-
-" NERDTreeToggle
-map <leader><space> :NERDTreeToggle<cr>
-
-" Edit Note Vim
-map <leader>en :edit note:
-
-" Add Note Vim
-map <leader>an Note:
-
-" Execut in terminal
-nnoremap <leader>ex :!
-
-let g:user_emmet_leader_key='<C-Z>'
 
 " Jump out of parantises
 inoremap <C-e> <C-o>A
@@ -492,32 +473,7 @@ inoremap <C-e> <C-o>A
 " Search tag using CntrP
 nnoremap <leader>. :CtrlPTag<cr>
 
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-
-"Synatastic settins
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint']
-
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '⚠️'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
-
-" edit vimrc/zshrc and load vimrc bindings
+" Edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>ez :vsp ~/.zshrc<CR>
 nnoremap <leader>et :vsp ~/.tmux.conf<CR>
@@ -531,31 +487,165 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
-" Remap region expansion
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-
 " Quickly select text you just pasted
 noremap gV `[v`]
+
+" Jump from parantesis
+inoremap <C-e> <C-o>A
+
+" Execut in terminal
+nnoremap <leader>ex :!
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins specific settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UltiSnipsExpandTrigger---------{{{
+  let g:UltiSnipsExpandTrigger = "<tab>"
+  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+  let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+"}}}
+
+" Css----------------------------{{{
+  " Map bc to run CSScomb. bc stands for beautify css
+  autocmd FileType css noremap <buffer> <leader>bc :CSScomb<CR>
+  " Automatically comb your CSS on save
+  " autocmd BufWritePre,FileWritePre *.css,*.less,*.scss,*.sass silent! :CSScomb
+
+  augroup VimCSS3Syntax
+    autocmd!
+    autocmd FileType css setlocal iskeyword+=-
+  augroup END
+"}}}
+
+" Synatstic-----------------------{{{
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_loc_list_height = 5
+  let g:syntastic_auto_loc_list = 0
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 1
+  let g:syntastic_javascript_checkers = ['eslint']
+
+  let g:syntastic_error_symbol = '❌'
+  let g:syntastic_style_error_symbol = '⁉️'
+  let g:syntastic_warning_symbol = '⚠️'
+  let g:syntastic_style_warning_symbol = '⚠️'
+
+  highlight link SyntasticErrorSign SignColumn
+  highlight link SyntasticWarningSign SignColumn
+  highlight link SyntasticStyleErrorSign SignColumn
+  highlight link SyntasticStyleWarningSign SignColumn
+"}}}
+
+" Neocomplete---------------------{{{
+  "Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  " Use neocomplete.
+  let g:neocomplete#enable_at_startup = 1
+  " Use smartcase.
+  let g:neocomplete#enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+  " Define dictionary.
+  let g:neocomplete#sources#dictionary#dictionaries = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+          \ }
+
+  " Define keyword.
+  if !exists('g:neocomplete#keyword_patterns')
+      let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+  " Plugin key-mappings.
+  inoremap <expr><C-g>     neocomplete#undo_completion()
+  inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+  " Recommended key-mappings.
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? "\<C-y>" : "\<CR>"
+  endfunction
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+  " Enable omni completion.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"}}}
+
+" Emmet customization ---------------------------{{{
+" Enable Emmet in all modes
+" Remapping <C-y>, just doesn't cut it.
+  function! s:expand_html_tab()
+" try to determine if we're within quotes or tags.
+" if so, assume we're in an emmet fill area.
+   let line = getline('.')
+   if col('.') < len(line)
+     let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
+     if len(line) >= 2
+        return "\<C-n>"
+     endif
+   endif
+" expand anything emmet thinks is expandable.
+  if emmet#isExpandable()
+    return "\<C-y>,"
+  endif
+" return a regular tab character
+  return "\<tab>"
+  endfunction
+  autocmd FileType html,markdown imap <buffer><expr><tab> <sid>expand_html_tab()
+  let g:user_emmet_mode='a'
+  let g:user_emmet_complete_tag = 1
+  let g:user_emmet_install_global = 0
+  autocmd FileType html,css EmmetInstall
+"}}}
+
+" Conoline--------------------{{{
+  let g:conoline_auto_enable = 1
+  let g:conoline_use_colorscheme_default_normal=1
+  let g:conoline_use_colorscheme_default_insert=1
+"}}}
+
+" IndentLine-------------------{{{
+let g:indentLine_char = '|'
+let g:indentLine_color_term = 239
+"}}}
+
+" Rainbow activation
+let g:rainbow_active = 1
+
+" NERDTreeToggle
+map <leader><space> :NERDTreeToggle<cr>
+
+" Edit Note Vim
+map <leader>en :edit note:
+
+" Add Note Vim
+map <leader>an Note:
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
 
 " 80 line
 let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="120,".join(range(400,999),",")
 
-" Jump from parantesis
-inoremap <C-e> <C-o>A
 
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-" Map bc to run CSScomb. bc stands for beautify css
-autocmd FileType css noremap <buffer> <leader>bc :CSScomb<CR>
-" Automatically comb your CSS on save
-" autocmd BufWritePre,FileWritePre *.css,*.less,*.scss,*.sass silent! :CSScomb
+" To trevel in undo history
+" :erlier 10s
+" :later 5m
