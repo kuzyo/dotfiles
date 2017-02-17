@@ -420,8 +420,6 @@ autocmd FilterWritePre  * :call DeleteTrailingWS()
 autocmd BufWritePre     * :call DeleteTrailingWS()
 
 " Visualize tabs, trailing whitespaces and funny characters
-" http://www.reddit.com/r/programming/comments/9wlb7/proggitors_do_you_like_the_idea_of_indented/c0esam1
-" https://wincent.com/blog/making-vim-highlight-suspicious-characters
 set list
 set listchars=tab:»·,trail:·
 
@@ -499,6 +497,7 @@ nnoremap <leader>ex :!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins specific settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " UltiSnipsExpandTrigger---------{{{
   let g:UltiSnipsExpandTrigger = "<tab>"
   let g:UltiSnipsJumpForwardTrigger = "<tab>"
@@ -589,11 +588,11 @@ nnoremap <leader>ex :!
 "}}}
 
 " Emmet customization ---------------------------{{{
-" Enable Emmet in all modes
-" Remapping <C-y>, just doesn't cut it.
-  function! s:expand_html_tab()
-" try to determine if we're within quotes or tags.
-" if so, assume we're in an emmet fill area.
+  " Enable Emmet in all modes
+  " Remapping <C-y>, just doesn't cut it.
+    function! s:expand_html_tab()
+  " try to determine if we're within quotes or tags.
+  " if so, assume we're in an emmet fill area.
    let line = getline('.')
    if col('.') < len(line)
      let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
@@ -601,11 +600,11 @@ nnoremap <leader>ex :!
         return "\<C-n>"
      endif
    endif
-" expand anything emmet thinks is expandable.
+  " expand anything emmet thinks is expandable.
   if emmet#isExpandable()
     return "\<C-y>,"
   endif
-" return a regular tab character
+  " return a regular tab character
   return "\<tab>"
   endfunction
   autocmd FileType html,markdown imap <buffer><expr><tab> <sid>expand_html_tab()
@@ -622,8 +621,8 @@ nnoremap <leader>ex :!
 "}}}
 
 " IndentLine-------------------{{{
-let g:indentLine_char = '|'
-let g:indentLine_color_term = 239
+  let g:indentLine_char = '|'
+  let g:indentLine_color_term = 239
 "}}}
 
 " Rainbow activation
