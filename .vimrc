@@ -641,12 +641,6 @@ let g:rainbow_active = 1
 " NERDTreeToggle
 map <leader><space> :NERDTreeToggle<cr>
 
-" Edit Note Vim
-map <leader>en :edit note:
-
-" Add Note Vim
-map <leader>an Note:
-
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
 
