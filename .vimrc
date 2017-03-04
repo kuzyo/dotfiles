@@ -39,9 +39,22 @@ call vundle#begin()
   Plugin 'jelera/vim-javascript-syntax'
   Plugin 'jsx/jsx.vim'
   Plugin 'hail2u/vim-css3-syntax'
+  Plugin 'slim-template/vim-slim'
 "}}}
 
-" Search----------------{{{
+" Notes----------------{{{
+  Plugin 'vimwiki/vimwiki'
+"}}}
+
+" Tags---------------- {{{
+  Plugin 'xolox/vim-misc'
+"}}}
+
+" Node specific--------{{{
+  Plugin 'moll/vim-node'
+"}}}
+
+" Search---------------{{{
   Plugin 'rking/ag.vim'
   Plugin 'skwp/greplace.vim'
   Plugin 'dkprice/vim-easygrep'
@@ -95,12 +108,9 @@ call vundle#begin()
   Plugin 'MarcWeber/vim-addon-mw-utils'
   Plugin 'myusuf3/numbers.vim'
   Plugin 'ryanoasis/vim-devicons'
-  Plugin 'xolox/vim-misc'
-  Plugin 'xolox/vim-notes'
   Plugin 'rbgrouleff/bclose.vim'
   Plugin 'jiangmiao/auto-pairs'
   Plugin 'mattn/emmet-vim'
-  Plugin 'szw/vim-tags'
   Plugin 'vim-scripts/BufOnly.vim'
   Plugin 'easymotion/vim-easymotion'
   Plugin 'Yggdroot/indentLine'
@@ -111,9 +121,9 @@ call vundle#begin()
   Plugin 'csscomb/vim-csscomb'
   Plugin 'christoomey/vim-tmux-navigator'
   Plugin 'sickill/vim-pasta'
-  Plugin 'gko/vim-coloresque'
   Plugin 'miyakogi/conoline.vim'
   Plugin 'terryma/vim-multiple-cursors'
+  Plugin 'Valloric/MatchTagAlways'
 "}}}
 
 " The following are examples of different formats supported.
@@ -643,6 +653,11 @@ nmap s <Plug>(easymotion-overwin-f2)
 " 80 line
 let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="120,".join(range(400,999),",")
+
+" Syntax
+autocmd BufRead,BufNewFile *.slim set filetype=slim
+autocmd BufRead,BufNewFile *.pug set filetype=pug
+
 
 
 " To trevel in undo history
