@@ -92,10 +92,17 @@ call vundle#begin()
   Plugin 'honza/vim-snippets'
 "}}}
 
+" Code Navigation (Unite/NerdTree)--- {{{
+  Plugin 'Shougo/unite.vim'
+  Plugin 'Shougo/neomru.vim'
+  Plugin 'Shougo/vimproc.vim'
+
+  Plugin 'scrooloose/nerdtree'
+"}}}
+
 " Utils-----------------{{{
   Plugin 'bling/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'blarghmatey/split-expander'
   Plugin 'tpope/vim-projectionist'
   Plugin 'tpope/vim-endwise'
@@ -104,7 +111,6 @@ call vundle#begin()
   Plugin 'tmhedberg/matchit'
   Plugin 'kana/vim-textobj-user'
   Plugin 'vim-scripts/tComment'
-  Plugin 'scrooloose/nerdtree'
   Plugin 'MarcWeber/vim-addon-mw-utils'
   Plugin 'myusuf3/numbers.vim'
   Plugin 'ryanoasis/vim-devicons'
@@ -597,6 +603,14 @@ nnoremap <leader>ex :!
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "}}}
 
+" Unite --------------------------------{{{
+  let g:unite_source_history_yank_enable = 1
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+  nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
+  nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
+  nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
+" }}}
+
 " Emmet customization ---------------------------{{{
   " Enable Emmet in all modes
   " Remapping <C-y>, just doesn't cut it.
@@ -651,6 +665,7 @@ let &colorcolumn="120,".join(range(400,999),",")
 " Syntax
 autocmd BufRead,BufNewFile *.slim set filetype=slim
 autocmd BufRead,BufNewFile *.pug set filetype=pug
+
 
 
 
