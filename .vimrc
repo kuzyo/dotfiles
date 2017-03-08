@@ -48,6 +48,8 @@ call vundle#begin()
 
 " Tags---------------- {{{
   Plugin 'xolox/vim-misc'
+  Plugin 'tsukkee/unite-tag'
+  Plugin 'ramitos/jsctags'
 "}}}
 
 " Node specific--------{{{
@@ -609,6 +611,7 @@ nnoremap <leader>ex :!
   nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
   nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
   nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
+  nnoremap <leader>t :<C-u>:Unite -no-split -start-insert tag<cr>
 " }}}
 
 " Emmet customization ---------------------------{{{
@@ -637,6 +640,9 @@ nnoremap <leader>ex :!
   let g:user_emmet_install_global = 0
   autocmd FileType html,css EmmetInstall
 "}}}
+
+" Tags ----------------------{{{
+" }}}
 
 " Conoline--------------------{{{
   let g:conoline_auto_enable = 1
