@@ -48,7 +48,6 @@ call vundle#begin()
 
 " Tags---------------- {{{
   Plugin 'xolox/vim-misc'
-  Plugin 'tsukkee/unite-tag'
   Plugin 'ramitos/jsctags'
 "}}}
 
@@ -81,12 +80,14 @@ call vundle#begin()
   Plugin 'jacoborus/tender'
   Plugin 'gertjanreynaert/cobalt2-vim-theme'
   Plugin 'dracula/vim'
+  Plugin 'atelierbram/Base2Tone-vim'
 "}}}
 
 " Completion------------{{{
   Plugin '1995eaton/vim-better-javascript-completion'
   Plugin 'othree/csscomplete.vim'
   Plugin 'Shougo/neocomplete.vim'
+  Plugin 'ervandew/supertab'
 "}}}
 
 " Snippets--------------{{{
@@ -94,11 +95,8 @@ call vundle#begin()
   Plugin 'honza/vim-snippets'
 "}}}
 
-" Code Navigation (Unite/NerdTree)--- {{{
-  Plugin 'Shougo/unite.vim'
-  Plugin 'Shougo/neomru.vim'
-  Plugin 'Shougo/vimproc.vim'
-
+" Code Navigation----- {{{
+  Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'scrooloose/nerdtree'
 "}}}
 
@@ -125,11 +123,9 @@ call vundle#begin()
   Plugin 'guns/vim-clojure-static'
   Plugin 'tpope/vim-fireplace'
   Plugin 'vim-scripts/paredit.vim'
-  Plugin 'luochen1990/rainbow'
   Plugin 'csscomb/vim-csscomb'
   Plugin 'christoomey/vim-tmux-navigator'
   Plugin 'sickill/vim-pasta'
-  Plugin 'miyakogi/conoline.vim'
   Plugin 'terryma/vim-multiple-cursors'
   Plugin 'Valloric/MatchTagAlways'
 "}}}
@@ -223,12 +219,19 @@ set numberwidth=5
 " Go with moves on empty space
 set virtualedit=all
 
+" Set cursor line
+set cursorline
+
 " Folding settings
 set foldmethod=indent   "fold based on indent
 set foldnestmax=10      "deepest fold is 10 levels
-"set nofoldenable        "dont fold by default
+" Set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
+" Fix escape timeout
+set timeoutlen=1000 ttimeoutlen=0
+
+" Set indentation
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
@@ -241,15 +244,52 @@ syntax enable
 filetype on
 
 set nocompatible
-" colorscheme solarized
-" colorscheme tender
-" colorscheme spacegray
-" colorscheme monokai
-" colorscheme molokai
-" colorscheme tomorrow
- colorscheme dracula
-" colorscheme cobalt2
 set background=dark
+
+" Themes -------------------------------{{{
+  " colorscheme solarized
+  " colorscheme tender
+  " colorscheme spacegray
+  " colorscheme monokai
+  " colorscheme molokai
+  " colorscheme tomorrow
+  " colorscheme dracula
+  " colorscheme cobalt2
+
+  " let g:airline_theme = "tomorrow"
+  " let g:airline_theme = "solarized"
+  " let g:airline_theme = "tender"
+"}}}
+
+" Base2Tone Themes ----------------------{{{
+   " colorscheme Base2Tone_EveningDark
+   " colorscheme Base2Tone_MorningDark
+   " colorscheme Base2Tone_SeaDark
+   " colorscheme Base2Tone_SpaceDark
+   " colorscheme Base2Tone_EarthDark
+   " colorscheme Base2Tone_ForestDark
+   colorscheme Base2Tone_DesertDark
+   " colorscheme Base2Tone_LakeDark
+   " colorscheme Base2Tone_MeadowDark
+   " colorscheme Base2Tone_DrawbridgeDark
+   " colorscheme Base2Tone_PoolDark
+   " colorscheme Base2Tone_HeathDark
+   " colorscheme Base2Tone_CaveDark
+
+   " let g:airline_theme='Base2Tone_EveningDark'
+   " let g:airline_theme='Base2Tone_MorningDark'
+   " let g:airline_theme='Base2Tone_SeaDark'
+   " let g:airline_theme='Base2Tone_SpaceDark'
+   " let g:airline_theme='Base2Tone_EarthDark'
+   " let g:airline_theme='Base2Tone_ForestDark'
+   let g:airline_theme='Base2Tone_DesertDark'
+   " let g:airline_theme='Base2Tone_LakeDark'
+   " let g:airline_theme='Base2Tone_MeadowDark'
+   " let g:airline_theme='Base2Tone_DrawbridgeDark'
+   " let g:airline_theme='Base2Tone_PoolDark'
+   " let g:airline_theme='Base2Tone_HeathDark'
+   " let g:airline_theme='Base2Tone_CaveDark'
+ "}}}
 
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
@@ -261,12 +301,6 @@ let g:solarized_termcolors=256
 " These are the basic settings to get the font to work (required):
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
 set encoding=utf-8
-
-" required if using https://github.com/bling/vim-airline
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -364,13 +398,6 @@ map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -392,11 +419,12 @@ let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
 endif
+
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 let g:airline_symbols.space = "\ua0"
-"let g:airline_theme = "tomorrow"
-let g:airline_theme = "solarized"
-" let g:airline_theme = "powerlineish"
-" let g:airline_theme = "tender"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -486,9 +514,6 @@ map <leader>s? z=
 " Jump out of parantises
 inoremap <C-e> <C-o>A
 
-" Search tag using CntrP
-nnoremap <leader>. :CtrlPTag<cr>
-
 " Edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>ez :vsp ~/.zshrc<CR>
@@ -511,6 +536,9 @@ inoremap <C-e> <C-o>A
 
 " Execut in terminal
 nnoremap <leader>ex :!
+
+" `G` skips to bottom of file and places line in middle of screen
+nnoremap G :norm! Gzz<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins specific settings
@@ -605,49 +633,8 @@ nnoremap <leader>ex :!
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "}}}
 
-" Unite --------------------------------{{{
-  let g:unite_source_history_yank_enable = 1
-  call unite#filters#matcher_default#use(['matcher_fuzzy'])
-  nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
-  nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
-  nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
-  nnoremap <leader>t :<C-u>:Unite -no-split -start-insert tag<cr>
-" }}}
-
 " Emmet customization ---------------------------{{{
-  " Enable Emmet in all modes
-  " Remapping <C-y>, just doesn't cut it.
-    function! s:expand_html_tab()
-  " try to determine if we're within quotes or tags.
-  " if so, assume we're in an emmet fill area.
-   let line = getline('.')
-   if col('.') < len(line)
-     let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
-     if len(line) >= 2
-        return "\<C-n>"
-     endif
-   endif
-  " expand anything emmet thinks is expandable.
-  if emmet#isExpandable()
-    return "\<C-y>,"
-  endif
-  " return a regular tab character
-  return "\<tab>"
-  endfunction
-  autocmd FileType html,markdown imap <buffer><expr><tab> <sid>expand_html_tab()
-  let g:user_emmet_mode='a'
-  let g:user_emmet_complete_tag = 1
-  let g:user_emmet_install_global = 0
-  autocmd FileType html,css EmmetInstall
-"}}}
-
-" Tags ----------------------{{{
-" }}}
-
-" Conoline--------------------{{{
-  let g:conoline_auto_enable = 1
-  let g:conoline_use_colorscheme_default_normal=1
-  let g:conoline_use_colorscheme_default_insert=1
+  let g:user_emmet_leader_key='<C-Z>'
 "}}}
 
 " IndentLine-------------------{{{
@@ -655,18 +642,39 @@ nnoremap <leader>ex :!
   let g:indentLine_color_term = 239
 "}}}
 
-" Rainbow activation
-let g:rainbow_active = 1
+" CtrlP------------------------{{{
+  " Search tag using CntrP
+  nnoremap <leader>. :CtrlPTag<cr>
 
-" NERDTreeToggle
-map <leader><space> :NERDTreeToggle<cr>
+ " Search buffer using CntrP
+  nnoremap <leader>b :CtrlPBuffer<cr>
+
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+  set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+  let g:ctrlp_custom_ignore = {
+     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+     \ 'file': '\v\.(exe|so|dll)$',
+     \ 'link': 'some_bad_symbolic_links',
+     \ }
+"}}}
+
+" NERDTree----------------------{{{
+  map <leader><space> :NERDTreeToggle<cr>
+  nmap ,c :NERDTreeFind<CR>
+"}}}
 
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
 
-" 80 line
-let &colorcolumn=join(range(81,999),",")
-let &colorcolumn="120,".join(range(400,999),",")
+" Force the cursor onto a new line after 80 characters
+set textwidth=80
+
+" However, in Git commit messages, let's make it 72 characters
+autocmd FileType gitcommit set textwidth=72
+
+" Colour the 81st (or 73rd) column so that we don't type over our limit
+set colorcolumn=+1
 
 " Syntax
 autocmd BufRead,BufNewFile *.slim set filetype=slim
