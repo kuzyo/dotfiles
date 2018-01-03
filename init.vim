@@ -38,7 +38,7 @@ call vundle#begin()
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'pangloss/vim-javascript'
   Plugin 'jelera/vim-javascript-syntax'
-  Plugin 'jsx/jsx.vim'
+  Plugin 'mxw/vim-jsx'
   Plugin 'hail2u/vim-css3-syntax'
   Plugin 'slim-template/vim-slim'
 "}}}
@@ -50,6 +50,7 @@ call vundle#begin()
 " Tags---------------- {{{
   Plugin 'xolox/vim-misc'
   Plugin 'ramitos/jsctags'
+  Plugin 'majutsushi/tagbar'
 "}}}
 
 " Node specific--------{{{
@@ -225,11 +226,11 @@ set virtualedit=all
 " Set cursor line
 set cursorline
 
-" Folding settings
-set foldmethod=indent   "fold based on indent
-set foldnestmax=10      "deepest fold is 10 levels
-" Set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
+" " Folding settings
+" set foldmethod=indent   "fold based on indent
+" set foldnestmax=10      "deepest fold is 10 levels
+"  Set nofoldenable        "dont fold by default
+" set foldlevel=1         "this is just what i use
 
 " Fix escape timeout
 set timeoutlen=1000 ttimeoutlen=0
@@ -249,7 +250,9 @@ filetype on
 set nocompatible
 set background=dark
 
-colorscheme Base2Tone_ForestDark
+colorscheme cobalt2
+let g:airline_theme='powerlineish'
+
 "}}}
 
 if $COLORTERM == 'gnome-terminal'
@@ -260,7 +263,7 @@ endif
 let g:solarized_termcolors=256
 
 " These are the basic settings to get the font to work (required):
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
+set guifont=Droid\ Sans\ Mono\ Fira\ for\ Powerline\ Nerd\ Font\ Complete\ 12
 set encoding=utf-8
 
 " Use Unix as the standard file type
@@ -509,22 +512,6 @@ nnoremap G :norm! Gzz<CR>
   nmap ,c :NERDTreeFind<CR>
 "}}}
 
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-
-" Force the cursor onto a new line after 80 characters
-set textwidth=80
-
-" However, in Git commit messages, let's make it 72 characters
-autocmd FileType gitcommit set textwidth=72
-
-" Colour the 81st (or 73rd) column so that we don't type over our limit
-set colorcolumn=+1
-
-" Syntax
-autocmd BufRead,BufNewFile *.slim set filetype=slim
-autocmd BufRead,BufNewFile *.pug set filetype=pug
-
 " Deoplete ------------------------------------------------------------------{{{
 
 " enable deoplete
@@ -629,6 +616,7 @@ autocmd BufRead,BufNewFile *.pug set filetype=pug
   nnoremap <silent> <c-p> :Denite file_rec<CR>
   nnoremap <silent> <leader>c :Denite colorscheme<CR>
   nnoremap <silent> <leader>b :Denite buffer<CR>
+  nnoremap <silent> <leader>me :Denite menu<CR>
   nnoremap <silent> <leader>\ :Denite grep<CR>
   call denite#custom#map('insert','<C-n>','<denite:move_to_next_line>','noremap')
   call denite#custom#map('insert','<C-p>','<denite:move_to_previous_line>','noremap')
@@ -673,6 +661,15 @@ autocmd BufRead,BufNewFile *.pug set filetype=pug
     \] " Append ' --' after log to get commit info commit buffers
 "}}}
 
+" Menu edit init---------------------------------------------------------{{{
+  let s:menus.nvim = {
+      \ 'description': 'Edit neovim init'
+      \}
+  let s:menus.nvim.file_candidates = [
+      \ ['init.vim', '~/.config/nvim/init.vim'],
+      \]
+" }}}
+
 "  Linting -------------------------------------------------------------------{{{
   let g:neomake_javascript_enabled_makers = ['eslint']
   call neomake#configure#automake('w')
@@ -698,8 +695,77 @@ autocmd BufRead,BufNewFile *.pug set filetype=pug
   " let g:neomake_verbose = 3
 "}}}
 
+" Fold, gets it's own section  ----------------------------------------------{{{
+
+  function! MyFoldText() " {{{
+      let line = getline(v:foldstart)
+      let nucolwidth = &fdc + &number * &numberwidth
+      let windowwidth = winwidth(0) - nucolwidth - 3
+      let foldedlinecount = v:foldend - v:foldstart
+
+      " expand tabs into spaces
+      let onetab = strpart('          ', 0, &tabstop)
+      let line = substitute(line, '\t', onetab, 'g')
+
+      let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+      " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines')
+      " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines   ')
+      let fillcharcount = windowwidth - len(line)
+      " return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' Lines'
+      return line . '⋯'. repeat(" ",fillcharcount)
+  endfunction " }}}
+
+  set foldtext=MyFoldText()
+
+  autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+  autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+
+  " autocmd FileType vim setlocal fdc=1
+  set foldlevel=99
+
+  " Space to toggle folds.
+  nnoremap <Space> za
+  vnoremap <Space> za
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd FileType vim setlocal foldlevel=0
+
+  autocmd FileType javascript,jsx,html,css,scss,typescript setlocal foldlevel=99
+
+  autocmd FileType css,scss,json setlocal foldmethod=marker
+  autocmd FileType css,scss,json setlocal foldmarker={,}
+
+  autocmd FileType coffee setl foldmethod=indent
+  let g:xml_syntax_folding = 1
+  autocmd FileType xml setl foldmethod=syntax
+
+  autocmd FileType html setl foldmethod=expr
+  autocmd FileType html setl foldexpr=HTMLFolds()
+
+  autocmd FileType javascript,jsx,typescript,json setl foldmethod=syntax
+
+" }}}
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Force the cursor onto a new line after 80 characters
+set textwidth=80
+
+" However, in Git commit messages, let's make it 72 characters
+autocmd FileType gitcommit set textwidth=72
+
+" Colour the 81st (or 73rd) column so that we don't type over our limit
+set colorcolumn=+1
+
+" Syntax
+autocmd BufRead,BufNewFile *.slim set filetype=slim
+autocmd BufRead,BufNewFile *.pug set filetype=pug
+
+:tnoremap jj <C-\><C-n>
+:set guicursor=
+
+nmap <F8> :TagbarToggle<CR>
+
 " To trevel in undo history
 " :erlier 10s
 " :later 5m
-:tnoremap jj <C-\><C-n>
-:set guicursor=
